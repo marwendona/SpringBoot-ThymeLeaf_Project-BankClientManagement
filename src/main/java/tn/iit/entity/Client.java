@@ -24,5 +24,5 @@ public class Client implements Serializable {
     private String lastName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Client> clients;
+    private List<Account> accounts;
 }
