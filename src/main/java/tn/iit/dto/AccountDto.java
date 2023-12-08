@@ -2,14 +2,9 @@ package tn.iit.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
 @Builder
 public class AccountDto {
-    private Integer rib;
+    private Long rib;
     private float balance;
 }

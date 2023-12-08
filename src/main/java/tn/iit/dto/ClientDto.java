@@ -2,15 +2,10 @@ package tn.iit.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
 @Builder
 public class ClientDto {
-    private String cin;
+    private Long cin;
     private String firstName;
     private String lastName;
 }
