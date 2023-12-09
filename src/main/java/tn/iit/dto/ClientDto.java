@@ -8,4 +8,5 @@ public class ClientDto {
     private Long cin;
     private String firstName;
     private String lastName;
+    private String address;
 }

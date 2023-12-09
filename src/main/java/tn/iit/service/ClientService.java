@@ -23,6 +23,7 @@ public class ClientService {
         client.setCin(clientDto.getCin());
         client.setFirstName(clientDto.getFirstName());
         client.setLastName(clientDto.getLastName());
+        client.setAddress(clientDto.getAddress());
         client = clientDao.save(client);
 
         return client.getCin();
@@ -41,6 +42,7 @@ public class ClientService {
 
         existingClient.setFirstName(updatedClientDto.getFirstName());
         existingClient.setLastName(updatedClientDto.getLastName());
+        existingClient.setAddress(updatedClientDto.getAddress());
         clientDao.save(existingClient);
         return existingClient.getCin();
     }

@@ -1,16 +1,21 @@
 package tn.iit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.EqualsAndHashCode.Include;
 
 import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "account")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rib")
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rib")
