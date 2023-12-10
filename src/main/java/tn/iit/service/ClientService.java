@@ -1,6 +1,7 @@
 package tn.iit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.iit.adapter.ClientAdapter;
 import tn.iit.dao.ClientDao;
@@ -34,7 +35,7 @@ public class ClientService {
     }
 
     public List<Client> getAllClients() {
-        return clientDao.findAll();
+        return clientDao.findAll(Sort.by(Sort.Direction.ASC, "cin"));
     }
 
     public ClientDto getClientByCin(Long cin) {

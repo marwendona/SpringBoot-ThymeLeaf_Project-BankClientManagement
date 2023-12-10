@@ -1,6 +1,7 @@
 package tn.iit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.iit.adapter.AccountAdapter;
 import tn.iit.dao.AccountDao;
@@ -55,6 +56,6 @@ public class AccountService {
     }
 
     public List<Account> getAllAccounts() {
-        return accountDao.findAll();
+        return accountDao.findAll(Sort.by(Sort.Direction.DESC, "rib"));
     }
 }
