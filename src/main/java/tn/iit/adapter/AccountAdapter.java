@@ -10,6 +10,7 @@ public class AccountAdapter {
         return AccountDto.builder()
                 .rib(account.getRib())
                 .balance(account.getBalance())
+                .client(account.getClient())
                 .build();
     }
 }
