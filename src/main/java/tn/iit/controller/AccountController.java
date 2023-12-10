@@ -48,6 +48,12 @@ public class AccountController {
         return "redirect:/accounts";
     }
 
+    @ResponseBody
+    @PostMapping("/delete-ajax")
+    public void deleteAjax(@RequestParam(name = "rib") Long rib) {
+        accountService.deleteAccount(rib);
+    }
+
     @GetMapping("/edit/{rib}")
     public String editAccount(@PathVariable Long rib, Model model) {
         AccountDto accountDto = accountService.getAccountByRib(rib);
