@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface ClientDao extends JpaRepository<Client, Long> {
     List<Client> findByFirstNameAndLastName(String firstName, String lastName);
+
+    List<Client> findByFirstName(String firstName);
+
+    List<Client> findByLastName(String lastName);
 }

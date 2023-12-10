@@ -57,7 +57,17 @@ public class ClientService {
     }
 
     public List<ClientDto> getClientsByFirstNameAndLastName(String firstName, String lastName) {
-        List<Client> clients = clientDao.findByFirstNameAndLastName(firstName, lastName);
+        List<Client> clients;
+
+        if (!"".equals(firstName) && !"".equals(lastName)) {
+            clients = clientDao.findByFirstNameAndLastName(firstName, lastName);
+        } else if (!"".equals(firstName)) {
+            clients = clientDao.findByFirstName(firstName);
+        } else if (!"".equals(lastName)) {
+            clients = clientDao.findByLastName(lastName);
+        } else {
+            clients = clientDao.findAll();
+        }
 
         List<ClientDto> clientDtos = clients.stream()
                 .map(clientAdapter::convertToDto)

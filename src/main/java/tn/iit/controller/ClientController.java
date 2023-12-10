@@ -74,15 +74,13 @@ public class ClientController {
     }
 
     @PostMapping("/search")
-    public ModelAndView searchClients(@RequestParam(name = "firstName") String firstName,
-                                      @RequestParam(name = "lastName") String lastName) {
+    public ModelAndView searchClients(@RequestParam(name = "firstName", defaultValue = "") String firstName,
+                                      @RequestParam(name = "lastName", defaultValue = "") String lastName) {
         ModelAndView modelAndView = new ModelAndView();
-        if (!"".equals(firstName) && !"".equals(lastName)) {
-            modelAndView.addObject("clients", clientService.getClientsByFirstNameAndLastName(firstName, lastName));
-        } else {
-            modelAndView.addObject("clients", clientService.getAllClients());
-        }
+
+        modelAndView.addObject("clients", clientService.getClientsByFirstNameAndLastName(firstName, lastName));
         modelAndView.setViewName("clients");
+
         return modelAndView;
     }
 }
