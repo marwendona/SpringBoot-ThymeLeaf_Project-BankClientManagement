@@ -9,10 +9,8 @@ import tn.iit.service.AccountService;
 
 import java.util.List;
 
-import static tn.iit.application.ApplicationProperties.BASE_URL;
-
 @RestController
-@RequestMapping(BASE_URL + "/accounts")
+@RequestMapping("/accounts")
 @CrossOrigin
 public class AccountController {
     private final AccountService accountService;

@@ -1,20 +1,17 @@
 package tn.iit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import tn.iit.dto.ClientDto;
-import tn.iit.entity.Client;
 import tn.iit.service.ClientService;
 
-import java.util.List;
-
-import static tn.iit.application.ApplicationProperties.BASE_URL;
-
-@RestController
-@RequestMapping(BASE_URL + "/clients")
-@CrossOrigin
+@Controller
+@RequestMapping("/clients")
 public class ClientController {
+
     private final ClientService clientService;
 
     @Autowired
@@ -22,41 +19,64 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @PostMapping
-    public ResponseEntity<Long> createClient(@RequestBody ClientDto clientDto) {
-        Long newCin = clientService.createClient(clientDto);
-        return ResponseEntity.ok(newCin);
-    }
-
     @GetMapping
-    public ResponseEntity<List<Client>> getAllClients() {
-        List<Client> clients = clientService.getAllClients();
-        return ResponseEntity.ok(clients);
+    public ModelAndView getAllClients() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("clients", clientService.getAllClients());
+        modelAndView.setViewName("clients");
+        return modelAndView;
     }
 
-    @GetMapping("/{cin}")
-    public ResponseEntity<Client> getClientByCin(@PathVariable Long cin) {
-        Client client = clientService.getClientByCin(cin);
-        if (client != null) {
-            return ResponseEntity.ok(client);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping
+    public String createClient(@RequestParam(name = "cin") Long cin,
+                               @RequestParam(name = "firstName") String firstName,
+                               @RequestParam(name = "lastName") String lastName,
+                               @RequestParam(name = "address") String address) {
+        ClientDto clientDto = ClientDto.builder()
+                .cin(cin)
+                .firstName(firstName)
+                .lastName(lastName)
+                .address(address)
+                .build();
+        clientService.createClient(clientDto);
+        return "redirect:/clients";
     }
 
-    @PutMapping("/{cin}")
-    public ResponseEntity<Long> updateClient(@PathVariable Long cin, @RequestBody ClientDto updatedClientDto) {
-        Long updatedCin = clientService.updateClient(cin, updatedClientDto);
-        if (updatedCin != null) {
-            return ResponseEntity.ok(updatedCin);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/add")
+    public String showAddClientForm(Model model) {
+        model.addAttribute("client", new ClientDto());
+        return "add-client";
     }
 
-    @DeleteMapping("/{cin}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Long cin) {
+    @GetMapping("/delete/{cin}")
+    public String deleteClient(@PathVariable(name = "cin") Long cin) {
         clientService.deleteClient(cin);
-        return ResponseEntity.noContent().build();
+        return "redirect:/clients";
+    }
+
+    @GetMapping("/edit/{cin}")
+    public String editClient(@PathVariable(name = "cin") Long cin, Model model) {
+        ClientDto clientDto = clientService.getClientByCin(cin);
+        model.addAttribute("client", clientDto);
+        return "edit-client";
+    }
+
+    @PostMapping("/{cin}")
+    public String updateClient(@PathVariable(name = "cin") Long cin, @ModelAttribute ClientDto updatedClientDto) {
+        clientService.updateClient(cin, updatedClientDto);
+        return "redirect:/clients";
+    }
+
+    @PostMapping("/search")
+    public ModelAndView searchClients(@RequestParam(name = "firstName") String firstName,
+                                      @RequestParam(name = "lastName") String lastName) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (!"".equals(firstName) && !"".equals(lastName)) {
+            modelAndView.addObject("clients", clientService.getClientsByFirstNameAndLastName(firstName, lastName));
+        } else {
+            modelAndView.addObject("clients", clientService.getAllClients());
+        }
+        modelAndView.setViewName("clients");
+        return modelAndView;
     }
 }
