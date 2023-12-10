@@ -3,8 +3,6 @@
 <head>
     <title>Client List</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Ajout du style personnalisé -->
-    <link href="/css/custom-style.css" rel="stylesheet">
 </head>
 <body class="text-center">
 <div class="container mt-5">
@@ -18,7 +16,9 @@
             <input type="submit" value="Search" class="btn btn-outline-secondary"/>
         </div>
     </form>
-    <!-- Table pour afficher la liste des clients -->
+    <div style="display: flex; justify-content: flex-start; margin-right: 5%;">
+        <a th:href="@{/clients/add}" class="btn btn-success">Add Client</a>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -30,7 +30,6 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Utilisation de Thymeleaf pour itérer sur la liste de clients -->
         <tr th:each="client: ${clients}">
             <td th:text="${client.cin}"/>
             <td th:text="${client.firstName}"/>
@@ -39,15 +38,12 @@
             <td>
                 <a th:href="'/clients/edit/' +${client.cin}" class="btn btn-outline-info">Edit</a>
                 <a th:href="'/clients/delete/' +${client.cin}" class="btn btn-danger">Delete</a>
+                <a th:href="'javascript:deleteClient('+${client.cin}+')'" class="btn btn-danger">Delete-Ajax</a>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <a th:href="@{/clients/add}" class="btn btn-success">Add Client</a>
 </div>
-
-<!-- Ajout des scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>

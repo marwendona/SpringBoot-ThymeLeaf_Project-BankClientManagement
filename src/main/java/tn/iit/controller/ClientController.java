@@ -54,6 +54,12 @@ public class ClientController {
         return "redirect:/clients";
     }
 
+    @ResponseBody
+    @PostMapping("/delete-ajax")
+    public void deleteAjax(@RequestParam(name = "cin") Long cin) {
+        clientService.deleteClient(cin);
+    }
+
     @GetMapping("/edit/{cin}")
     public String editClient(@PathVariable(name = "cin") Long cin, Model model) {
         ClientDto clientDto = clientService.getClientByCin(cin);
