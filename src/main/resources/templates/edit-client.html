@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Client</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ajout du style personnalisé -->
+    <link href="/css/custom-style.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<div class="container mt-5">
+    <h1 class="fw-bold">Edit Client</h1>
+    <!-- Formulaire pour éditer un client -->
+    <form th:action="@{/clients}" method="POST" class="d-inline-block">
+        <table class="table table-info table-hover">
+            <tr>
+                <th>CIN</th>
+                <td><input class="form-control" type="text" name="cin" th:value="${client.cin}" readonly/></td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td><input class="form-control" type="text" name="firstName" th:value="${client.firstName}"/></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input class="form-control" type="text" name="lastName" th:value="${client.lastName}"/></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><input class="form-control" type="text" name="address" th:value="${client.address}"/></td>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td class="text-center"><input type="submit" value="Update" class="btn btn-primary"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- Ajout des scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/clients.js"></script>
+</body>
+</html>
+
