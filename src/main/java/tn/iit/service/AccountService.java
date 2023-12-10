@@ -2,6 +2,7 @@ package tn.iit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.iit.adapter.AccountAdapter;
 import tn.iit.dao.AccountDao;
 import tn.iit.dao.ClientDao;
 import tn.iit.dto.AccountDto;
@@ -15,11 +16,13 @@ import java.util.List;
 public class AccountService {
     private final AccountDao accountDao;
     private final ClientDao clientDao;
+    private final AccountAdapter accountAdapter;
 
     @Autowired
-    public AccountService(AccountDao accountDao, ClientDao clientDao) {
+    public AccountService(AccountDao accountDao, ClientDao clientDao, AccountAdapter accountAdapter) {
         this.accountDao = accountDao;
         this.clientDao = clientDao;
+        this.accountAdapter = accountAdapter;
     }
 
     public Long createAccount(AccountDto accountDto, Long cin) {
@@ -46,8 +49,9 @@ public class AccountService {
         accountDao.deleteById(rib);
     }
 
-    public Account getAccountByRib(Long rib) {
-        return accountDao.findById(rib).orElse(null);
+    public AccountDto getAccountByRib(Long rib) {
+        Account account = accountDao.findById(rib).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        return accountAdapter.convertToDto(account);
     }
 
     public List<Account> getAllAccounts() {
