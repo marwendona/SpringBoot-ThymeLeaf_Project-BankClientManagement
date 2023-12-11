@@ -1,16 +1,12 @@
-<!-- add-client.html -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Client</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Ajout du style personnalisé -->
-    <link href="/css/custom-style.css" rel="stylesheet">
 </head>
 <body class="text-center">
 <div class="container mt-5">
-    <h1 class="fw-bold">Add a Client</h1>
-    <!-- Form to add a client -->
+    <h1 class="text-center mb-3 display-5 font-weight-bold">Add a Client</h1>
     <form th:action="@{/clients}" method="POST" class="d-inline-block">
         <table class="table table-info table-hover">
             <tr>
@@ -31,17 +27,16 @@
             </tr>
             <tr>
                 <th>Action</th>
-                <td class="text-center"><input class="btn btn-success" type="submit" value="Save"></td>
+                <td class="text-center">
+                    <input class="btn btn-success" type="submit" value="Save">
+                    <a th:href="@{/clients}" class="btn btn-secondary">Cancel</a>
+                </td>
             </tr>
         </table>
     </form>
 </div>
-
-<!-- Ajout des scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/clients.js"></script>
 </body>
 </html>

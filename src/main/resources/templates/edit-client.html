@@ -3,13 +3,10 @@
 <head>
     <title>Edit Client</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Ajout du style personnalisé -->
-    <link href="/css/custom-style.css" rel="stylesheet">
 </head>
 <body class="text-center">
 <div class="container mt-5">
-    <h1 class="fw-bold">Edit Client</h1>
-    <!-- Formulaire pour éditer un client -->
+    <h1 class="text-center mb-3 display-5 font-weight-bold">Edit a Client</h1>
     <form th:action="@{/clients}" method="POST" class="d-inline-block">
         <table class="table table-info table-hover">
             <tr>
@@ -30,18 +27,16 @@
             </tr>
             <tr>
                 <th>Action</th>
-                <td class="text-center"><input type="submit" value="Update" class="btn btn-primary"/></td>
+                <td class="text-center">
+                    <input type="submit" value="Update" class="btn btn-primary"/>
+                    <a th:href="@{/clients}" class="btn btn-secondary">Cancel</a>
+                </td>
             </tr>
         </table>
     </form>
 </div>
-
-<!-- Ajout des scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/clients.js"></script>
 </body>
 </html>
-
