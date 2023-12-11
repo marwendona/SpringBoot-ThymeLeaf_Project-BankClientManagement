@@ -3,6 +3,7 @@
 <head>
     <title>Add Account</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
 </head>
 <body class="text-center">
 <div class="container mt-5">
@@ -19,15 +20,15 @@
             </tr>
             <tr>
                 <th>CIN</th>
-                <td><input class="form-control" type="text" name="cin"/></td>
+                <td><input id="cin" class="form-control" type="text" name="cin"/></td>
             </tr>
             <tr>
                 <th>First Name</th>
-                <td><input class="form-control" type="text" name="firstName"/></td>
+                <td><input id="firstName" class="form-control" type="text" name="firstName"/></td>
             </tr>
             <tr>
                 <th>Last Name</th>
-                <td><input class="form-control" type="text" name="lastName"></td>
+                <td><input id="lastName" class="form-control" type="text" name="lastName"></td>
             </tr>
             <tr>
                 <th>Action</th>
@@ -40,7 +41,8 @@
     </form>
 </div>
 <script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/clients.js"></script>
+<script src="/js/accounts.js"></script>
 </body>
 </html>

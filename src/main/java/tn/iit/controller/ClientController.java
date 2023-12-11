@@ -1,12 +1,17 @@
 package tn.iit.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import tn.iit.dto.ClientDto;
+import tn.iit.entity.Client;
 import tn.iit.service.ClientService;
+
 
 @Controller
 @RequestMapping("/clients")
@@ -27,11 +32,17 @@ public class ClientController {
         return modelAndView;
     }
 
+    @ResponseBody
+    @GetMapping("/all")
+    public List<Client> getClients() {
+        return clientService.getAllClients();
+    }
+
     @PostMapping
     public String createClient(@RequestParam(name = "cin") Long cin,
-                               @RequestParam(name = "firstName") String firstName,
-                               @RequestParam(name = "lastName") String lastName,
-                               @RequestParam(name = "address") String address) {
+        @RequestParam(name = "firstName") String firstName,
+        @RequestParam(name = "lastName") String lastName,
+        @RequestParam(name = "address") String address) {
         ClientDto clientDto = ClientDto.builder()
                 .cin(cin)
                 .firstName(firstName)
@@ -75,7 +86,7 @@ public class ClientController {
 
     @PostMapping("/search")
     public ModelAndView searchClients(@RequestParam(name = "firstName", defaultValue = "") String firstName,
-                                      @RequestParam(name = "lastName", defaultValue = "") String lastName) {
+        @RequestParam(name = "lastName", defaultValue = "") String lastName) {
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.addObject("clients", clientService.getClientsByFirstNameAndLastName(firstName, lastName));
