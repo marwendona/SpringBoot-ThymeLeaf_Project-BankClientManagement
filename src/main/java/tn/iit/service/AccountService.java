@@ -27,7 +27,7 @@ public class AccountService {
     }
 
     public Long createAccount(AccountDto accountDto, Long cin) {
-        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client not found"));
+        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin.toString() + " is not found"));
 
         Account account = new Account();
         account.setBalance(accountDto.getBalance());
@@ -39,7 +39,7 @@ public class AccountService {
 
     public Long updateAccount(Long rib, AccountDto updatedAccountDto) {
         Account existingAccount = accountDao.findById(rib)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib.toString() + " is not found"));
 
         existingAccount.setBalance(updatedAccountDto.getBalance());
         accountDao.save(existingAccount);
@@ -51,7 +51,7 @@ public class AccountService {
     }
 
     public AccountDto getAccountByRib(Long rib) {
-        Account account = accountDao.findById(rib).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        Account account = accountDao.findById(rib).orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib.toString() + " is not found"));
         return accountAdapter.convertToDto(account);
     }
 
