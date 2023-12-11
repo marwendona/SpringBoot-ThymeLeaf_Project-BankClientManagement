@@ -4,11 +4,11 @@
     <title>Edit Client</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="text-center">
-<div class="container mt-5">
-    <h1 class="text-center mb-3 display-5 font-weight-bold">Edit a Client</h1>
+<body class="text-center" style="background-image: url('/images/addClient.jpg'); background-size: cover;">
+<div class="container mt-5 offset-md-6 col-md-6">
+    <h1 class="text-center mb-3 display-5 font-weight-bold text-white" style="font-size: 100px;">Edit Client</h1>
     <form th:action="@{/clients}" method="POST" class="d-inline-block">
-        <table class="table table-info table-hover">
+        <table class="table table-hover text-white" style="font-size: 30px;">
             <tr>
                 <th>CIN</th>
                 <td><input class="form-control" type="text" name="cin" th:value="${client.cin}" readonly/></td>
@@ -28,8 +28,8 @@
             <tr>
                 <th>Action</th>
                 <td class="text-center">
-                    <input type="submit" value="Update" class="btn btn-primary"/>
-                    <a th:href="@{/clients}" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Update" class="btn btn-primary btn-lg"/>
+                    <a th:href="@{/clients}" class="btn btn-secondary btn-lg">Cancel</a>
                 </td>
             </tr>
         </table>
