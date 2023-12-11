@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import tn.iit.dto.ClientDto;
-import tn.iit.entity.Client;
 import tn.iit.service.ClientService;
 
 
@@ -34,7 +33,7 @@ public class ClientController {
 
     @ResponseBody
     @GetMapping("/all")
-    public List<Client> getClients() {
+    public List<ClientDto> getClients() {
         return clientService.getAllClients();
     }
 

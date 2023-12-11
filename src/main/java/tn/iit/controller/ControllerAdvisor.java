@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
-    public String handleAccountNotFoundException(ResourceNotFoundException ex, Model model) {
+    public String handleResourceNotFoundException(ResourceNotFoundException ex, Model model) {
         model.addAttribute("timestamp", LocalDateTime.now());
         model.addAttribute("message", ex.getMessage());
         return "404";

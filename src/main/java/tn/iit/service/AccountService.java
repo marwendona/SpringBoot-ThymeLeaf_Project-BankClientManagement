@@ -12,6 +12,7 @@ import tn.iit.entity.Client;
 import tn.iit.exception.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -27,7 +28,7 @@ public class AccountService {
     }
 
     public Long createAccount(AccountDto accountDto, Long cin) {
-        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin.toString() + " is not found"));
+        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin + " is not found"));
 
         Account account = new Account();
         account.setBalance(accountDto.getBalance());
@@ -39,7 +40,7 @@ public class AccountService {
 
     public Long updateAccount(Long rib, AccountDto updatedAccountDto) {
         Account existingAccount = accountDao.findById(rib)
-                .orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib.toString() + " is not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib + " is not found"));
 
         existingAccount.setBalance(updatedAccountDto.getBalance());
         accountDao.save(existingAccount);
@@ -51,11 +52,15 @@ public class AccountService {
     }
 
     public AccountDto getAccountByRib(Long rib) {
-        Account account = accountDao.findById(rib).orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib.toString() + " is not found"));
+        Account account = accountDao.findById(rib).orElseThrow(() -> new ResourceNotFoundException("Account with Rib " + rib + " is not found"));
         return accountAdapter.convertToDto(account);
     }
 
-    public List<Account> getAllAccounts() {
-        return accountDao.findAll(Sort.by(Sort.Direction.DESC, "rib"));
+    public List<AccountDto> getAllAccounts() {
+        List<Account> accounts = accountDao.findAll(Sort.by(Sort.Direction.DESC, "rib"));
+
+        return accounts.stream()
+                .map(accountAdapter::convertToDto)
+                .collect(Collectors.toList());
     }
 }

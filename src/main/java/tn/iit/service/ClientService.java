@@ -34,17 +34,21 @@ public class ClientService {
         return client.getCin();
     }
 
-    public List<Client> getAllClients() {
-        return clientDao.findAll(Sort.by(Sort.Direction.ASC, "cin"));
+    public List<ClientDto> getAllClients() {
+        List<Client> clients = clientDao.findAll(Sort.by(Sort.Direction.ASC, "cin"));
+
+        return clients.stream()
+                .map(clientAdapter::convertToDto)
+                .collect(Collectors.toList());
     }
 
     public ClientDto getClientByCin(Long cin) {
-        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin.toString() + " is not found"));
+        Client client = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin + " is not found"));
         return clientAdapter.convertToDto(client);
     }
 
     public Long updateClient(Long cin, ClientDto updatedClientDto) {
-        Client existingClient = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin.toString() + " is not found"));
+        Client existingClient = clientDao.findById(cin).orElseThrow(() -> new ResourceNotFoundException("Client with CIN " + cin + " is not found"));
 
         existingClient.setFirstName(updatedClientDto.getFirstName());
         existingClient.setLastName(updatedClientDto.getLastName());
@@ -70,10 +74,8 @@ public class ClientService {
             clients = clientDao.findAll();
         }
 
-        List<ClientDto> clientDtos = clients.stream()
+        return clients.stream()
                 .map(clientAdapter::convertToDto)
                 .collect(Collectors.toList());
-
-        return clientDtos;
     }
 }
