@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Error - Object not found</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+		.error-container {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div class="error-container">
+	<h1 class="display-4">Error - Object not found</h1>
+	<h2 class="lead"><span th:text="${timestamp}"/></h2>
+	<h2 class="lead"><span th:text="${message}"/></h2>
+	<a th:href="@{/home}" class="btn btn-primary">Go to Home Page</a>
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
