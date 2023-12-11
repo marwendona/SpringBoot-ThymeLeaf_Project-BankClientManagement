@@ -9,7 +9,12 @@ import lombok.EqualsAndHashCode.Include;
 import java.io.Serializable;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "account")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rib")
 public class Account implements Serializable {

@@ -6,11 +6,16 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "client")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cin")
 public class Client implements Serializable {
