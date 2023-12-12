@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Account List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet"/>
 </head>
 <body class="text-center" style="background-image: url('/images/clients.jpg'); background-size: cover;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,9 +46,9 @@
             <td th:text="${account.client.firstName}"></td>
             <td th:text="${account.client.lastName}"></td>
             <td>
-                <a th:href="'/accounts/edit/' +${account.rib}" class="btn btn-outline-info btn-lg">Edit</a>
-                <a th:href="'/accounts/delete/' +${account.rib}" class="btn btn-danger btn-lg">Delete</a>
-                <a th:href="'javascript:deleteAccount('+${account.rib}+')'" class="btn btn-danger btn-lg">Delete-Ajax</a>
+                <a th:href="'/accounts/edit/' +${account.rib}" class="btn btn-outline-info btn-lg"><i class="uil uil-pen"></i></a>
+                <a th:href="'javascript:deleteAccount('+${account.rib}+')'" class="btn btn-danger btn-lg"><i class="uil uil-trash"></i></a>
+                <a th:href="'/accounts/delete/' +${account.rib}" class="btn btn-danger btn-lg"><i class="uil uil-trash"></i>Auto-Delete</a>
             </td>
         </tr>
         </tbody>
