@@ -4,7 +4,7 @@
     <title>Edit Account</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="text-center" style="background-image: url('/images/addAccount.jpg'); background-size: cover;">
+<body class="text-center" style="background-image: url('/images/addClient.jpg'); background-size: cover;">
 <div class="container mt-5 offset-md-6 col-md-6">
     <h1 class="text-center mb-3 display-5 font-weight-bold text-white" style="font-size: 100px;">Edit Account</h1>
     <form th:action="@{/accounts}" method="POST" class="d-inline-block">
@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Balance</th>
-                <td><input class="form-control" type="text" name="balance" th:value="${account.balance}"/></td>
+                <td><input class="form-control" type="text" name="balance" pattern="[0-9]+(\.[0-9]+)?" title="Please enter numeric values (integer or float)." required th:value="${account.balance}"/></td>
             </tr>
             <tr>
                 <th>CIN</th>

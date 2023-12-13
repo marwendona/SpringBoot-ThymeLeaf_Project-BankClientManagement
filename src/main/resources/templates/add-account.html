@@ -5,22 +5,22 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/jquery-ui.css">
 </head>
-<body class="text-center" style="background-image: url('/images/addAccount.jpg'); background-size: cover;">
+<body class="text-center" style="background-image: url('/images/addClient.jpg'); background-size: cover;">
 <div class="container mt-5 offset-md-6 col-md-6">
     <h1 class="text-center mb-3 display-5 font-weight-bold text-white" style="font-size: 100px;">Add Account</h1>
     <form th:action="@{/accounts}" method="POST" class="d-inline-block">
         <table class="table table-hover text-white" style="font-size: 30px;">
             <tr>
                 <th>Rib</th>
-                <td><input class="form-control" type="text" name="rib"/></td>
+                <td><input class="form-control" type="text" name="rib" pattern="[0-9]+" title="Please enter only numeric values." required/></td>
             </tr>
             <tr>
                 <th>Balance</th>
-                <td><input class="form-control" type="text" name="balance"/></td>
+                <td><input class="form-control" type="text" name="balance" pattern="[0-9]+(\.[0-9]+)?" title="Please enter numeric values (integer or float)." required/></td>
             </tr>
             <tr>
                 <th>CIN</th>
-                <td><input id="cin" class="form-control" type="text" name="cin"/></td>
+                <td><input id="cin" class="form-control" type="text" name="cin" pattern="[0-9]+" title="Please enter only numeric values." required/></td>
             </tr>
             <tr>
                 <th>First Name</th>
